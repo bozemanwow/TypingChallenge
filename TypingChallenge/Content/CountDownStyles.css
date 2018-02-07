@@ -1,0 +1,31 @@
+﻿#Panel1 {
+    word-wrap: break-word;
+    width: 500px;
+   
+    height: 200px;
+    overflow: scroll;
+    font-size: medium;
+    background-color: white;
+    border-color:black;
+    border: groove;
+}
+#Panel3 {
+    word-wrap: break-word;
+    width: 250px;   
+    height: 200px;
+    font-size: medium;
+    background-color: aquamarine;
+    border-color: black;
+    border: groove;
+}
+#Panel2 {
+    word-wrap: break-word;
+    width: 500px;
+    min-width: 5px;
+    max-width: inherit;
+    height: 200px;
+    font-size: medium;
+    background-color: aquamarine;
+    border-color: black;
+    border: groove;
+}

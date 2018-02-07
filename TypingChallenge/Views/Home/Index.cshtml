@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div>
+<h1>Typing Challenge</h1>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-1 jumbotron" id="Panel1">
+            cccccccccc
+            cccccccccccccccc
+            ccccccccccccccc Helpcccccccc ccccccccc
+            ccccccccccccccccccccccccccccccc ccccc
+            ccccccccccccccccccccc ccccc ccccccccccccccccccccccccccccccccccc ccccccccccccccccccccccccc ccccccccccccccccccc
+            cccccccccccccccccccccccccccccccccccccc ccccccccccccccccccccccccccccccccc cccccccccccccccccccccccccc
+            cccccccc
+            cccccccccccccccccccccccccccc
+        </div>
+
+        <div class="col-md-1 jumbotron" id="Panel3" >
+            <small  style="text-align:center" id="Timer">Timer 10!</small>
+            <small style="text-align:center" id="WordsTyped">?/100</small>
+        </div>
+
+    </div>
+
+    <div class="row">
+        
+
+            @Html.TextArea("inputUser", null, new { @class = "col-md-1 jumbotron", @onkeydown = "Startcount(10)" , @id = "Panel2" })
+
+       
+    </div>
+
+
+
+
+</div>
+
+<button onclick ="Startcount(10)" onkeydown="Startcount(10)">Click</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
