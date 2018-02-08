@@ -1,9 +1,9 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div>
+
 <h1>Typing Challenge</h1>
-<div class="container">
+<div class="container" >
 
     <div class="row">
 
@@ -19,8 +19,8 @@
         </div>
 
         <div class="col-md-1 jumbotron" id="Panel3" >
-            <small  style="text-align:center" id="Timer">Timer 10!</small>
-            <small style="text-align:center" id="WordsTyped">?/100</small>
+            <p  style="text-align:center" id="Timer">Start typing sample text to begin test</p>
+            <p style="text-align:center" id="WordsTyped"></p>
         </div>
 
     </div>
@@ -28,7 +28,7 @@
     <div class="row">
         
 
-            @Html.TextArea("inputUser", null, new { @class = "col-md-1 jumbotron", @onkeydown = "Startcount(10)" , @id = "Panel2" })
+            @Html.TextArea("inputUser", null, new { @class = "col-md-1 jumbotron", @onkeydown = "Startcount()" , @id = "Panel2" })
 
        
     </div>
@@ -38,7 +38,7 @@
 
 </div>
 
-<button onclick ="Startcount(10)" onkeydown="Startcount(10)">Click</button>
+<button onclick ="Startcount()" onkeydown="Startcount(10)">Click</button>
 
 
 

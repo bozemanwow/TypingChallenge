@@ -1,36 +1,71 @@
 ﻿var intival = 1000;
 var counting = false;
+var displayTextCharCount = 0;
+var displayTextWordCount = 0;
+var timeLength = 59;
 var timerElem = document.getElementById("Timer");
 var wordsTypedElem = document.getElementById("WordsTyped");
 var userInput = document.getElementById("Panel2");
-function Startcount(secs) {
 
+
+window.onkeypress = Startcount;
+
+
+function Startcount() {
     
     if (!counting)
     {
+        var displayText = document.getElementById("Panel1");
+        
+        displayTextCharCount = displayText.innerText.length;
+        displayTextWordCount = displayText.innerText.split(" ").length;
         counting = true;
        
-        
-        countDown(secs);
-       
+        setUiPanel3(0, 0, 0);
+        setCurrentTypedCount();
     }
     
 }
-function countDown(secs)
+
+
+function setUiPanel3(secs,min,hours)
 {
-    var numOfwords = userInput.value.split(" ").length;
-    timerElem.innerHTML = "Timer " + secs + "!" + numOfwords.toString();
-        secs--;
+   
+    if (counting)
+    {
+        timerElem.innerHTML = convertToTimerstring(secs, min, hours);
+        secs++;
+        if (secs > timeLength) {
 
-        
-
-        wordsTypedElem.innerHTML = numOfwords + "/" + 100;
-
-        if (secs >= 0)
-            var timer = setTimeout('countDown(' + secs + ')', intival);
-        else {
-
-            counting = false;
-
+            secs = 0;
+            min++;
         }
+
+        if (min > timeLength) {
+
+            min = 0;
+            hours++;
+        }
+
+        setTimeout('setUiPanel3(' + secs.toString() + ',' + min.toString() + ',' + hours.toString() + ')', intival);
+    }
+}
+
+function convertToTimerstring(secs, min, hours)
+{
+    var secStr = secs < 10 ? "0" + secs.toString() : secs.toString();
+    var minStr = min < 10 ? "0" + min.toString() : min.toString();
+    var hoursStr = hours < 10 ? "0" + hours.toString() : hours.toString();
+
+    return hoursStr + ":" + minStr + ":" + secStr;
+}
+
+function setCurrentTypedCount()
+{
+    counting = userInput.value.length <= displayTextCharCount;
+    if (counting)
+    {
+        wordsTypedElem.innerText = userInput.value.split(" ").length + " Words Typed ";
+        setTimeout('setCurrentTypedCount()', 1);
+    }
 }
