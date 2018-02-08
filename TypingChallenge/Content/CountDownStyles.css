@@ -29,3 +29,14 @@
     border-color: black;
     border: groove;
 }
+#Debug {
+    word-wrap: break-word;
+    width: 500px;
+    min-width: 5px;
+    max-width: inherit;
+    height: 200px;
+    font-size: medium;
+    background-color: aquamarine;
+    border-color: black;
+    border: groove;
+}

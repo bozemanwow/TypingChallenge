@@ -24,25 +24,27 @@
         <div class="col-md-1 jumbotron" id="Panel3" >
             <p  style="text-align:center" id="Timer">Start typing sample text to begin test</p>
             <p style="text-align:center" id="WordsTyped"></p>
-            <p style="text-align:center" id="WordsPercent" onkeypress="keyDetection"></p>
+            <p style="text-align:center" id="WordsPercent"></p>
         </div>
 
     </div>
 
     <div class="row">
         
-
-            @Html.TextArea("inputUser", null, new { @class = "col-md-1 jumbotron", @onkeydown = "Startcount()" , @id = "Panel2" })
-
        
-    </div>
+            @Html.TextArea("inputUser", null, new { @class = "col-md-1 jumbotron", @disabled = "disabled", @id = "Panel2" })
+       
+        <div class="col-md-1 jumbotron" id="Debug">
+
+            
+        </div>
 
 
 
 
 </div>
 
-<button onclick ="Startcount()" onkeydown="Startcount(10)">Click</button>
+<button onclick ="resetTest()" >Reset</button>
 
 
 
