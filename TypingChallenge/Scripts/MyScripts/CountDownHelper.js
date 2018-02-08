@@ -7,9 +7,15 @@ var timerElem = document.getElementById("Timer");
 var wordsTypedElem = document.getElementById("WordsTyped");
 var userInput = document.getElementById("Panel2");
 
+var words = document.getElementById("Words");
+document.onkeypress = keyDetection;
 
-window.onkeypress = Startcount;
-
+function keyDetection(event)
+{
+    var key_press = String.fromCharCode(event.keyCode);
+    userInput.innerHTML += key_press;
+    Startcount();
+}
 
 function Startcount() {
     
