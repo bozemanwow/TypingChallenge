@@ -5,23 +5,27 @@ var displayTextWordCount = 0;
 var timeLength = 59;
 var timerElem = document.getElementById("Timer");
 var wordsTypedElem = document.getElementById("WordsTyped");
+var displayText = document.getElementById("Panel1");
 var userInput = document.getElementById("Panel2");
+var WordsPercent = document.getElementById("WordsPercent");
 
-var words = document.getElementById("Words");
+
 document.onkeypress = keyDetection;
 
 function keyDetection(event)
 {
-    var key_press = String.fromCharCode(event.keyCode);
-    userInput.innerHTML += key_press;
-    Startcount();
+    if (!counting)
+    {
+        userInput.focus();
+        Startcount();
+    }
 }
 
 function Startcount() {
     
     if (!counting)
     {
-        var displayText = document.getElementById("Panel1");
+        
         
         displayTextCharCount = displayText.innerText.length;
         displayTextWordCount = displayText.innerText.split(" ").length;
@@ -74,4 +78,11 @@ function setCurrentTypedCount()
         wordsTypedElem.innerText = userInput.value.split(" ").length + " Words Typed ";
         setTimeout('setCurrentTypedCount()', 1);
     }
+    else
+
+}
+
+function setTestResults()
+{
+
 }
