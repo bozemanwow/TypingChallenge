@@ -35,8 +35,7 @@ function keyDetection(event)
 function setUiPanel3(secs,min,hours)
 {
    
-    if (counting)
-    {
+    if (counting) {
         timerElem.innerHTML = convertToTimerstring(secs, min, hours);
         secs++;
         if (secs > timeLength) {
@@ -53,6 +52,9 @@ function setUiPanel3(secs,min,hours)
 
         setTimeout('setUiPanel3(' + secs.toString() + ',' + min.toString() + ',' + hours.toString() + ')', intival);
     }
+    else
+        setTestResults(secs, min, hours);
+  
 }
 
 function convertToTimerstring(secs, min, hours)
@@ -66,16 +68,22 @@ function convertToTimerstring(secs, min, hours)
 
 function setCurrentTypedCount()
 {
-    counting = userInput.value.length <= displayTextCharCount;
-    wordsTypedElem.innerText = userInput.value.split(" ").length + " Words Typed ";
-    if (!counting) {
-        userInput.setAttribute("disabled", "disabled");
+    counting = userInput.value.length < displayTextCharCount;
+   
+    if (!counting)
+    {
+       
+        userInput.setAttribute("disabled", "disabled");        
     }
+   
+       // wordsTypedElem.innerText = userInput.value.split(" ").length + " Words Typed ";
 }
 
-function setTestResults()
+function setTestResults(secs, min, hours)
 {
-
+    var totalTimemins = (secs + (min * 60) + (hours * 60 * 60)) / timeLength;
+    wordsTypedElem.innerText = (userInput.value.length / totalTimemins).toString() + " Words per minute ";
+   
 }
 
 function resetTest()
