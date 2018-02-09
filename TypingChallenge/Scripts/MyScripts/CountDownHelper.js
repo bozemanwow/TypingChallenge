@@ -42,8 +42,8 @@ function keyDetection(event)
 
 function setUiPanel3(secs,min,hours)
 {
-   
-    if (testingInput) {
+
+    if (testingInput && !wrappingup) {
         timerElem.innerHTML = convertToTimerstring(secs, min, hours);
         secs++;
         if (secs > timeLength) {
@@ -62,7 +62,7 @@ function setUiPanel3(secs,min,hours)
     }
     else
     {
-        wrappingup = true;
+       
         setTimeout('setTestResults(' + secs.toString() + ',' + min.toString() + ',' + hours.toString() + ')', 10);
     }
         
@@ -85,26 +85,61 @@ function setCurrentTypedCount()
    
     if (!testingInput)
     {
+        wrappingup = true;
         setTimeout("disableInput()", 1);
           
     }
+    
  
 }
+
 function disableInput()
 {
     userInput.setAttribute("disabled", "disabled");     
 }
+
 function setTestResults(secs, min, hours)
 {
     var totalTimemins = (secs + min * 60 + hours * 60 * 60) / 60;
-    var errorOffset = findErrors();
-    debug.innerHTML = totalTimemins.toString() + " " + userInput.value.split(" ").length.toString();
+    var errorOffset = findErrors(totalTimemins);
+    
     wordsPercent.innerText = (Math.floor(userInput.value.split(" ").length / totalTimemins)).toString() + " WPM ";
     
 }
-function findErrors()
+function findErrors(totalTimemins)
 {
-    return -1;
+    debug.innerHTML += "___" + totalTimemins.toString() + " " + userInput.value.split(" ").length.toString();
+    var length = userInput.value.split(" ").length;     
+    var Error = 0;
+    
+    var userInputArray = userInput.value.split(" ");
+   var displayTextArray = displayText.innerHTML.split(" ");
+  
+    for (var i = 0; i < length; i++)
+    {
+
+        if (userInputArray[i] != displayTextArray[i])
+        {
+           
+          
+         var  errorEle = document.createElement("error");
+          errorEle.setAttribute("class", "InError");
+          errorEle.innerHTML = " " + userInputArray[i];
+          debug.appendChild(errorEle);
+        }
+        else
+        {
+           var CorecEle = document.createElement("correct");
+           
+           CorecEle.innerHTML = " " + userInputArray[i];
+           debug.appendChild(CorecEle);
+        }
+       
+        
+    }
+   
+    
+    return Error;
 }
 function resetTest()
 {

@@ -40,3 +40,6 @@
     border-color: black;
     border: groove;
 }
+.InError{
+    color:red;
+}
