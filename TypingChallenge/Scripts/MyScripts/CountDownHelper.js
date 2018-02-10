@@ -19,22 +19,20 @@ var timerElem = document.getElementById("Timer");
 var wordsTypedElem = document.getElementById("WordsTyped");
 var errorElem = document.getElementById("Error");
 var displayText = document.getElementById("Panel1");
-var userInput;
+var userInput = document.getElementById("Panel2");;
 var inputDisplay = document.getElementById("Display");
 var wordsPercent = document.getElementById("WPM");
 var debug = document.getElementById("Debug");
 
-
 document.onkeypress = keyDetection;
 // AutoDetect Keys for instant test starting
-
 function keyDetection(event)
 {
     if (!wrappingup)
     {
         // Starts Test
         if (!testingInput)
-        {
+        {            
             testingInput = true;
             displayTextCharCount = displayText.innerText.length;
             displayTextWordCount = displayText.innerText.split(" ").length;
@@ -52,6 +50,7 @@ function keyDetection(event)
         }
     }
 }
+
 // Keep tracks of time sepratlly
 function setUiPanel3(secs,min,hours)
 {
@@ -102,32 +101,39 @@ function setCurrentTypedCount()
         setTimeout("disableInput()", 1);          
     } 
 }
+
 // Replaces div with textarea
 function enableInput()
 {
-    
-    userInput = document.createElement("textarea");
-    userInput.setAttribute("class", "col-md-1 jumbotron");
-    userInput.setAttribute("id", "Panel2");
-    inputDisplay.appendChild(userInput);
+    setUsetInputDisplay("textarea");
     userInput.focus();
 }
+
 //stops input
 function disableInput()
 {   
     userInput.setAttribute("disabled", "disabled");     
 }
 
+function setUsetInputDisplay(type)
+{
+    if (userInput != null)
+        inputDisplay.removeChild(userInput);
+
+    userInput = document.createElement(type);
+    userInput.setAttribute("class", "col-md-1 jumbotron");
+    userInput.setAttribute("id", "Panel2");
+    inputDisplay.appendChild(userInput);
+}
+
 // Calculates Words per minute and error rating then displays them
 function setTestResults(secs, min, hours)
-{
-    
+{    
     var totalTimemins = (secs + min * timeScale + hours * timeScale * timeScale) / timeScale;
     wordsPercent.innerText = (Math.floor(userInput.value.split(" ").length / totalTimemins)).toString() + " WPM";    
 
     var errorRating = displayErrorsAndGetRating(totalTimemins);   
     errorElem.innerHTML = " With " + Math.floor(errorRating) + "% Errors ";
-
 }
 
 // Finds Errors and returns a percentage of Error- shows place of errors
@@ -140,12 +146,7 @@ function displayErrorsAndGetRating(totalTimemins)
     var userInputArray = userInput.value.split(" ");
     var displayTextArray = displayText.innerHTML.split(" ");
 
-    inputDisplay.removeChild(userInput);
-
-    userInput = document.createElement("div");
-    userInput.setAttribute("class", "col-md-1 jumbotron");
-    userInput.setAttribute("id", "Panel2");
-    inputDisplay.appendChild(userInput);
+    setUsetInputDisplay("div");
 
     for (var i = 0; i < length; i++)
     {
@@ -160,8 +161,7 @@ function displayErrorsAndGetRating(totalTimemins)
         }
         else
         {
-           var corecEle = document.createElement("correct");
-           
+           var corecEle = document.createElement("correct");           
            corecEle.innerHTML = " " + userInputArray[i];
            userInput.appendChild(corecEle);
         }
@@ -175,7 +175,7 @@ function displayErrorsAndGetRating(totalTimemins)
 // Clean up UI for reuse;
 function resetTest()
 {
-    inputDisplay.removeChild(userInput);
+    setUsetInputDisplay("temp");
     testingInput = false;
     wrappingup = false;
     userInput.value = "";   
@@ -183,7 +183,7 @@ function resetTest()
     debug.innerHTML = "";
     wordsPercent.innerText = "";
     errorElem.innerHTML = "";
-    timerElem.innerHTML = "Start typing sample";
+    timerElem.innerHTML = "Start typing sample text to begin test";
     
 }
 
