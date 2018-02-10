@@ -13,7 +13,7 @@ namespace TypingChallenge
                        "~/Scripts/MyScripts/CountDownHelper.js"));
             // My Css Files
             bundles.Add(new StyleBundle("~/Content/Mycss").Include(
-                   "~/Content/CountDownStyles.css"));
+                   "~/Content/MyContent/CountDownStyles.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));

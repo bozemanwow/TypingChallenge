@@ -1,36 +1,28 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿<!--Bozeman, Todd Code-->
+@{
+    ViewBag.Title = "Bozeman, Todd Code Sample";
 }
 
 <h1>Typing Challenge</h1>
 <div class="container">
 
     <div class="row">
-
+        <!--Display Panel-->
         <div class="col-md-1 jumbotron" id="Panel1">Catch me if you can, I am the Ginger Bread Man.</div>
 
+        <!--Stats Panel-->
         <div class="col-md-1 jumbotron" id="Panel3">
             <p style="text-align:center" id="Timer">Start typing sample text to begin test</p>
             <p style="text-align:center" id="WordsTyped"></p>
             <p style="text-align:center" id="WPM"></p>
+            <div  id="Debug"></div>
         </div>
-
     </div>
 
     <div class="row">
-
-
+        <!--Input Panel-->
         @Html.TextArea("inputUser", null, new { @class = "col-md-1 jumbotron", @disabled = "disabled", @id = "Panel2" })
-
-        <div class="col-md-1 jumbotron" id="Debug">
-
-
-        </div>
-
-
-
-
-    </div>
+     </div>
 </div>
 <button onclick ="resetTest()" >Reset</button>
 
