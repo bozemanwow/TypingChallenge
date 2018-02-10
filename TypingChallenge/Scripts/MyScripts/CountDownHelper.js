@@ -1,8 +1,10 @@
-﻿// Magic Variables
-var intival = 1000;
+﻿/* Bozeman Todd Code*/
+// Magic Variables
+var clockIntival = 1000;
 var lessThanTen = 10;
 var timeLength = 59;
-
+var inputOffset = 1;
+var timeScale = 60;
 // When true test is running
 var testingInput = false;
 // When true test is not running but updating ui
@@ -36,7 +38,7 @@ function keyDetection(event)
             enableInput();   
             
             setCurrentTypedCount();
-            // runs async with test
+            // starts async clock
             setUiPanel3(0, 0, 0);
         }
         // Checks to make sure is not over character limit
@@ -67,7 +69,7 @@ function setUiPanel3(secs,min,hours)
             hours++;
         }
 
-        setTimeout('setUiPanel3(' + secs.toString() + ',' + min.toString() + ',' + hours.toString() + ')', intival);
+        setTimeout('setUiPanel3(' + secs.toString() + ',' + min.toString() + ',' + hours.toString() + ')', clockIntival);
     }
     else
     {       
@@ -88,7 +90,7 @@ function convertTimeIntoString(secs, min, hours)
 // Checks current count and stops input once max characters is reached
 function setCurrentTypedCount()
 {
-    testingInput = userInput.value.length < displayTextCharCount - 1;
+    testingInput = userInput.value.length < displayTextCharCount - inputOffset;
     wordsTypedElem.innerText = userInput.value.split(" ").length + " Words Typed ";
    
     if (!testingInput)
@@ -111,7 +113,7 @@ function disableInput()
 // Calculates Words per minute and error rating then displays them
 function setTestResults(secs, min, hours)
 {
-    var totalTimemins = (secs + min * 60 + hours * 60 * 60) / 60;
+    var totalTimemins = (secs + min * timeScale + hours * timeScale * timeScale) / timeScale;
     var errorRating = findErrorsAndRating(totalTimemins);
 
     wordsPercent.innerText = (Math.floor(userInput.value.split(" ").length / totalTimemins)).toString() + " WPM; with " + Math.floor(errorRating) + "% Errors ";    
@@ -139,10 +141,10 @@ function findErrorsAndRating(totalTimemins)
         }
         else
         {
-           var CorecEle = document.createElement("correct");
+           var corecEle = document.createElement("correct");
            
-           CorecEle.innerHTML = " " + userInputArray[i];
-           debug.appendChild(CorecEle);
+           corecEle.innerHTML = " " + userInputArray[i];
+           debug.appendChild(corecEle);
         }
                
     }
